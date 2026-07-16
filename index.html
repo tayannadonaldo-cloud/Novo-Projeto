@@ -2,7 +2,7 @@
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Loja Digital Premium</title>
     <!-- Fonte Premium -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
@@ -16,13 +16,14 @@
             --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             --accent-color: #f59e0b;
             --whatsapp-color: #25D366;
-            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.98);
             --text-dark: #0f172a;
             --text-light: #475569;
             --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             --shadow-hover: 0 20px 40px -5px rgba(79, 70, 229, 0.25);
         }
 
+        /* --- Reset & Layout Base Responsivo --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
         body { background: var(--bg-gradient); color: var(--text-dark); min-height: 100vh; overflow-x: hidden; }
 
@@ -32,63 +33,49 @@
         @keyframes shimmer { 0% { transform: translateX(-100%) skewX(-15deg); } 50% { transform: translateX(200%) skewX(-15deg); } 100% { transform: translateX(200%) skewX(-15deg); } }
 
         /* --- Cabeçalho --- */
-        header { background: var(--primary-gradient); color: white; padding: 50px 20px 70px; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: var(--shadow-soft); animation: fadeInDown 0.8s ease-out; position: relative; }
-        header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -1px; }
-        header p { font-size: 1.1rem; opacity: 0.9; }
+        header { background: var(--primary-gradient); color: white; padding: 40px 20px 60px; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: var(--shadow-soft); animation: fadeInDown 0.8s ease-out; position: relative; }
+        header h1 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 700; margin-bottom: 10px; letter-spacing: -1px; }
+        header p { font-size: clamp(0.9rem, 3vw, 1.1rem); opacity: 0.9; }
 
         /* --- Vantagens Globais --- */
-        .advantages { max-width: 1100px; margin: -40px auto 40px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; position: relative; z-index: 10; animation: fadeInUp 1s ease-out; }
+        .advantages { max-width: 1100px; margin: -30px auto 40px; padding: 0 15px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; position: relative; z-index: 10; animation: fadeInUp 1s ease-out; }
         .adv-card { background: white; padding: 20px; border-radius: 20px; text-align: center; box-shadow: var(--shadow-soft); transition: transform 0.3s; border-bottom: 4px solid var(--whatsapp-color); }
-        .adv-card:hover { transform: translateY(-5px); }
         .adv-icon { font-size: 2.5rem; color: var(--whatsapp-color); margin-bottom: 15px; }
-        .adv-title { font-weight: 700; margin-bottom: 5px; }
+        .adv-title { font-weight: 700; margin-bottom: 5px; font-size: 1.1rem; }
         .adv-text { font-size: 0.85rem; color: var(--text-light); }
 
-        /* --- Filtros --- */
-        .controls { max-width: 1100px; margin: 0 auto 30px; padding: 0 20px; display: flex; flex-direction: column; gap: 20px; animation: fadeInUp 1s ease-out 0.2s both; }
-        .filters { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-        .filter-btn { background: white; border: 2px solid transparent; padding: 10px 25px; border-radius: 30px; font-weight: 600; color: var(--text-light); cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s ease; }
-        .filter-btn:hover { transform: translateY(-3px); color: var(--text-dark); }
-        .filter-btn.active { background: var(--text-dark); color: white; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); }
-
-        /* --- Grelha de Produtos --- */
-        .grid { max-width: 1100px; margin: 0 auto 80px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        /* --- Grelha de Produtos (Responsividade Perfeita: Android, Tablet, PC) --- */
+        .grid { max-width: 1100px; margin: 0 auto 80px; padding: 0 15px; display: grid; 
+                /* O minmax(280px) garante que cabe em iPhones e Androids antigos sem quebrar */
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        
         .card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-soft); transition: all 0.4s ease; animation: scaleIn 0.6s ease-out backwards; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.8); }
-        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
         .card-img-container { height: 180px; overflow: hidden; position: relative; }
         .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .card:hover .card-img { transform: scale(1.1); }
+        .card:hover .card-img { transform: scale(1.05); }
         .tag { position: absolute; top: 15px; right: 15px; background: rgba(255, 255, 255, 0.95); padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: var(--accent-color); box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 2; }
-        .card-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
-        .card-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+        
+        .card-body { padding: 25px 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 12px; }
 
         /* --- Marcas e Ícones --- */
-        .brand-showcase { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; align-items: center; }
-        .brand-badge { padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .brand-showcase { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; align-items: center; }
+        .brand-badge { padding: 5px 10px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .bg-netflix { background: #E50914; }
         .bg-amazon { background: #232F3E; color: #FF9900; }
         .bg-disney { background: #113CCF; }
         .bg-spotify { background: #1DB954; }
         
-        .social-icons { display: flex; gap: 12px; font-size: 1.5rem; margin-bottom: 15px; color: #475569; }
+        .social-icons { display: flex; gap: 10px; font-size: 1.6rem; margin-bottom: 15px; color: #475569; }
         .social-icons i.fa-whatsapp { color: #25D366; }
         .social-icons i.fa-telegram { color: #0088cc; }
         .social-icons i.fa-instagram { color: #E1306C; }
         .social-icons i.fa-tiktok { color: #000000; }
         .social-icons i.fa-facebook { color: #1877F2; }
 
-        .country-codes { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
-        .country-code { background: #f1f5f9; padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; border: 1px solid #e2e8f0; }
-
-        /* --- Vantagens (Toggle) --- */
-        .toggle-btn { background: none; border: none; color: var(--primary-gradient); font-weight: 600; font-size: 0.95rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 10px 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 15px; }
-        .toggle-btn i { transition: transform 0.3s; }
-        .toggle-btn.open i { transform: rotate(180deg); }
-        
-        .feature-list { list-style: none; margin-bottom: 20px; overflow: hidden; max-height: 0; transition: max-height 0.4s ease-in-out; }
-        .feature-list.open { max-height: 300px; }
-        .feature-list li { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .feature-list li i { color: var(--whatsapp-color); font-size: 1rem; }
+        .country-codes { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 15px; align-items: center; }
+        .country-code { background: #f1f5f9; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; border: 1px solid #e2e8f0; }
+        .highlight-country { background: var(--primary-gradient); color: white; border: none; }
 
         /* --- Seleção de Preço --- */
         .price-section { background: #f8fafc; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
@@ -96,12 +83,22 @@
         .price-select { width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #cbd5e1; font-size: 1rem; font-weight: 700; color: var(--text-dark); background: white; outline: none; cursor: pointer; transition: border-color 0.3s; }
         .price-select:focus { border-color: #4f46e5; }
 
-        /* --- Botão Comprar --- */
-        .btn-buy { background: var(--whatsapp-color); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 1.1rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3); width: 100%; }
+        /* --- Botão Comprar (Principal CTA) --- */
+        .btn-buy { background: var(--whatsapp-color); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 1.1rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3); width: 100%; margin-bottom: 15px; }
         .btn-buy::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%); transform: skewX(-15deg); animation: shimmer 3s infinite; }
-        .btn-buy:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4); background: #1da851; }
+        .btn-buy:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4); background: #1da851; }
 
-        .hide { display: none !important; }
+        /* --- Vantagens (Toggle Abaixo do Botão) --- */
+        .toggle-btn { background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 8px; color: var(--text-dark); font-weight: 600; font-size: 0.9rem; text-align: center; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px; width: 100%; padding: 12px; transition: background 0.3s, color 0.3s; }
+        .toggle-btn:hover { background: #e2e8f0; }
+        .toggle-btn i { transition: transform 0.3s; }
+        .toggle-btn.open i { transform: rotate(180deg); }
+        
+        .feature-list { list-style: none; overflow: hidden; max-height: 0; transition: max-height 0.4s ease-in-out, margin-top 0.4s; }
+        .feature-list.open { max-height: 350px; margin-top: 15px; }
+        .feature-list li { font-size: 0.85rem; color: var(--text-light); margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+        .feature-list li i { color: var(--whatsapp-color); font-size: 1.1rem; margin-top: 2px; }
+
     </style>
 </head>
 <body>
@@ -115,32 +112,26 @@
         <div class="adv-card">
             <i class="fas fa-bolt adv-icon"></i>
             <h3 class="adv-title">Entrega Imediata</h3>
-            <p class="adv-text">Receba os dados do seu cartão ou número em minutos através do WhatsApp.</p>
+            <p class="adv-text">Receba os seus dados em minutos via WhatsApp.</p>
         </div>
         <div class="adv-card">
             <i class="fas fa-globe adv-icon"></i>
             <h3 class="adv-title">Uso Global</h3>
-            <p class="adv-text">Serviços que funcionam em Moçambique e em qualquer outra parte do mundo.</p>
+            <p class="adv-text">Funciona perfeitamente em Moçambique e no Mundo.</p>
         </div>
         <div class="adv-card">
             <i class="fas fa-shield-alt adv-icon"></i>
             <h3 class="adv-title">100% Seguro</h3>
-            <p class="adv-text">Privacidade garantida. Não precisa de expor os seus dados bancários reais.</p>
-        </div>
-    </div>
-
-    <div class="controls">
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">Ver Tudo</button>
-            <button class="filter-btn" data-filter="cards">💳 Cartões Virtuais</button>
-            <button class="filter-btn" data-filter="numbers">📱 Números Virtuais</button>
+            <p class="adv-text">Privacidade garantida, sem expor dados reais.</p>
         </div>
     </div>
 
     <div class="grid" id="product-grid">
         
+        <!-- ========================================== -->
         <!-- PRODUTO: CARTÃO VIRTUAL -->
-        <div class="card" data-category="cards">
+        <!-- ========================================== -->
+        <div class="card">
             <div class="card-img-container">
                 <div class="tag"><i class="fas fa-fire"></i> Mais Popular</div>
                 <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="Cartão Virtual" class="card-img">
@@ -156,20 +147,6 @@
                     <span class="brand-badge bg-spotify"><i class="fab fa-spotify"></i> Spotify</span>
                 </div>
 
-                <!-- Botão de Ver Vantagens -->
-                <button class="toggle-btn" onclick="toggleFeatures('feat-card', this)">
-                    Ver as Vantagens <i class="fas fa-chevron-down"></i>
-                </button>
-
-                <!-- Lista Escondida de Vantagens -->
-                <ul class="feature-list" id="feat-card">
-                    <li><i class="fas fa-check-circle"></i> Compras online seguras</li>
-                    <li><i class="fas fa-check-circle"></i> Assinaturas sem stress</li>
-                    <li><i class="fas fa-check-circle"></i> Sem limites de gastos</li>
-                    <li><i class="fas fa-check-circle"></i> Aceite em qualquer país</li>
-                    <li><i class="fas fa-check-circle"></i> Pagamento de anúncios (Meta/Google)</li>
-                </ul>
-
                 <!-- Seleção de Preço (150 a 500) -->
                 <div class="price-section">
                     <label>Escolha o saldo pretendido:</label>
@@ -181,32 +158,47 @@
                     </select>
                 </div>
 
-                <!-- Botão de Compra Dinâmico -->
+                <!-- Botão de Compra Dinâmico (Sempre em Destaque) -->
                 <button class="btn-buy" onclick="comprarItem('Cartão Virtual Premium', 'price-card')">
                     <i class="fab fa-whatsapp"></i> Comprar Agora
                 </button>
+
+                <!-- Botão de Ver Vantagens (Movido para Baixo) -->
+                <button class="toggle-btn" onclick="toggleFeatures('feat-card', this)">
+                    Ver Vantagens do Cartão <i class="fas fa-chevron-down"></i>
+                </button>
+
+                <!-- Lista Escondida de Vantagens -->
+                <ul class="feature-list" id="feat-card">
+                    <li><i class="fas fa-check-circle"></i> <b>Segurança Máxima:</b> Compras online seguras e privadas.</li>
+                    <li><i class="fas fa-check-circle"></i> <b>Assinaturas Diretas:</b> Pague serviços de streaming sem problemas.</li>
+                    <li><i class="fas fa-check-circle"></i> <b>Sem Limites:</b> Não existem limites de transações diárias.</li>
+                    <li><i class="fas fa-check-circle"></i> <b>Global:</b> Aceite em qualquer país do mundo.</li>
+                    <li><i class="fas fa-check-circle"></i> <b>Anúncios:</b> Ideal para campanhas Meta Ads e Google Ads.</li>
+                </ul>
             </div>
         </div>
 
+        <!-- ========================================== -->
         <!-- PRODUTO: NÚMERO VIRTUAL -->
-        <div class="card" data-category="numbers">
+        <!-- ========================================== -->
+        <div class="card">
             <div class="card-img-container">
-                <div class="tag" style="color: #4f46e5;"><i class="fas fa-star"></i> Top Redes Sociais</div>
+                <div class="tag" style="color: #4f46e5;"><i class="fas fa-star"></i> Redes Sociais</div>
                 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Número Virtual" class="card-img">
             </div>
             <div class="card-body">
                 <h3 class="card-title">Número Virtual Global</h3>
                 
-                <!-- Códigos de Países -->
+                <!-- Códigos de Países com destaque para os +100 -->
                 <div class="country-codes">
                     <span class="country-code">🇺🇸 +1</span>
                     <span class="country-code">🇬🇧 +44</span>
                     <span class="country-code">🇧🇷 +55</span>
-                    <span class="country-code">🇵🇹 +351</span>
-                    <span class="country-code">🇿🇦 +27</span>
+                    <span class="country-code highlight-country">🌍 +100 Países Disponíveis</span>
                 </div>
 
-                <!-- Redes Sociais (Alta Qualidade) -->
+                <!-- Redes Sociais -->
                 <div class="social-icons">
                     <i class="fab fa-whatsapp" title="WhatsApp"></i>
                     <i class="fab fa-telegram" title="Telegram"></i>
@@ -214,19 +206,6 @@
                     <i class="fab fa-tiktok" title="TikTok"></i>
                     <i class="fab fa-facebook" title="Facebook"></i>
                 </div>
-
-                <!-- Botão de Ver Vantagens -->
-                <button class="toggle-btn" onclick="toggleFeatures('feat-number', this)">
-                    Ver as Vantagens <i class="fas fa-chevron-down"></i>
-                </button>
-
-                <!-- Lista Escondida de Vantagens -->
-                <ul class="feature-list" id="feat-number">
-                    <li><i class="fas fa-check-circle"></i> Registo anónimo em Apps</li>
-                    <li><i class="fas fa-check-circle"></i> Separe a vida pessoal dos negócios</li>
-                    <li><i class="fas fa-check-circle"></i> Receba o código SMS na hora</li>
-                    <li><i class="fas fa-check-circle"></i> Sem necessidade de chip físico</li>
-                </ul>
 
                 <!-- Seleção de Preço (135 a 300) -->
                 <div class="price-section">
@@ -239,10 +218,23 @@
                     </select>
                 </div>
 
-                <!-- Botão de Compra Dinâmico -->
+                <!-- Botão de Compra Dinâmico (Sempre em Destaque) -->
                 <button class="btn-buy" onclick="comprarItem('Número Virtual Global', 'price-number')">
                     <i class="fab fa-whatsapp"></i> Comprar Agora
                 </button>
+
+                <!-- Botão de Ver Vantagens (Movido para Baixo) -->
+                <button class="toggle-btn" onclick="toggleFeatures('feat-number', this)">
+                    Ver Vantagens do Número <i class="fas fa-chevron-down"></i>
+                </button>
+
+                <!-- Lista Escondida de Vantagens -->
+                <ul class="feature-list" id="feat-number">
+                    <li><i class="fas fa-check-circle"></i> <b>Privacidade:</b> Registe-se em Apps sem expor o seu número real.</li>
+                    <li><i class="fas fa-check-circle"></i> <b>Profissionalismo:</b> Separe a vida pessoal dos seus negócios.</li>
+                    <li><i class="fas fa-check-circle"></i> <b>Rapidez:</b> Receba o código SMS na hora para ativação.</li>
+                    <li><i class="fas fa-check-circle"></i> <b>Praticidade:</b> Funciona de forma 100% digital, sem necessidade de chip físico.</li>
+                </ul>
             </div>
         </div>
 
@@ -253,8 +245,19 @@
         // Função para mostrar/esconder vantagens animadamente
         function toggleFeatures(listId, btnElement) {
             const list = document.getElementById(listId);
+            const isOpen = list.classList.contains('open');
+            
+            // Alternar estado
             list.classList.toggle('open');
             btnElement.classList.toggle('open');
+
+            // Mudar ícone
+            const icon = btnElement.querySelector('i');
+            if (isOpen) {
+                icon.className = 'fas fa-chevron-down';
+            } else {
+                icon.className = 'fas fa-chevron-up';
+            }
         }
 
         // Função para gerar o link do WhatsApp dinamicamente
@@ -262,7 +265,7 @@
             // Pegar o preço selecionado
             const preco = document.getElementById(selectId).value;
             
-            // O seu número
+            // O seu número (Não alterar)
             const numeroTelefone = "258849085157";
             
             // Construir a mensagem com a instrução do comprovativo
@@ -271,36 +274,9 @@
             // Codificar a mensagem para URL
             const mensagemCodificada = encodeURIComponent(mensagem);
             
-            // Abrir WhatsApp
+            // Abrir WhatsApp numa nova janela/separador
             window.open(`https://wa.me/${numeroTelefone}?text=${mensagemCodificada}`, '_blank');
         }
-
-        // Lógica de Filtros
-        document.addEventListener('DOMContentLoaded', () => {
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            const cards = document.querySelectorAll('.card');
-
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    
-                    const filterValue = btn.getAttribute('data-filter');
-                    
-                    cards.forEach(card => {
-                        card.style.animation = 'none';
-                        card.offsetHeight; 
-                        
-                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-                            card.classList.remove('hide');
-                            card.style.animation = 'scaleIn 0.5s ease-out forwards';
-                        } else {
-                            card.classList.add('hide');
-                        }
-                    });
-                });
-            });
-        });
     </script>
 </body>
 </html>
