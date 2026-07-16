@@ -12,15 +12,15 @@
     <style>
         /* --- Variáveis de Cores Vivas --- */
         :root {
-            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
-            --accent-color: #ec4899;
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #db2777 100%);
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --accent-color: #f59e0b;
             --whatsapp-color: #25D366;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --text-dark: #1e293b;
-            --text-light: #64748b;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-dark: #0f172a;
+            --text-light: #475569;
             --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 20px 40px -5px rgba(99, 102, 241, 0.2);
+            --shadow-hover: 0 20px 40px -5px rgba(79, 70, 229, 0.25);
         }
 
         /* --- Estilos Base --- */
@@ -39,7 +39,7 @@
             overflow-x: hidden;
         }
 
-        /* --- Animações (Keyframes) --- */
+        /* --- Animações --- */
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -50,93 +50,95 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
         @keyframes scaleIn {
             from { transform: scale(0.9); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Animação do Brilho no Botão */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) skewX(-15deg); }
+            50% { transform: translateX(200%) skewX(-15deg); }
+            100% { transform: translateX(200%) skewX(-15deg); }
         }
 
         /* --- Cabeçalho --- */
         header {
             background: var(--primary-gradient);
             color: white;
-            padding: 40px 20px;
+            padding: 50px 20px 70px;
             text-align: center;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
             box-shadow: var(--shadow-soft);
             animation: fadeInDown 0.8s ease-out;
             position: relative;
-            overflow: hidden;
         }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            animation: spin 20s linear infinite;
-        }
-
-        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
+            letter-spacing: -1px;
         }
 
         header p {
             font-size: 1.1rem;
             opacity: 0.9;
-            position: relative;
-            z-index: 1;
         }
 
-        /* --- Pesquisa e Filtros --- */
+        /* --- Secção: As Vantagens --- */
+        .advantages {
+            max-width: 1100px;
+            margin: -40px auto 40px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .adv-card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s;
+            border-bottom: 4px solid var(--whatsapp-color);
+        }
+
+        .adv-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .adv-icon {
+            font-size: 2.5rem;
+            color: var(--whatsapp-color);
+            margin-bottom: 15px;
+        }
+
+        .adv-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .adv-text {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* --- Filtros e Pesquisa --- */
         .controls {
             max-width: 1100px;
-            margin: -25px auto 30px;
+            margin: 0 auto 30px;
             padding: 0 20px;
             display: flex;
             flex-direction: column;
             gap: 20px;
-            position: relative;
-            z-index: 10;
             animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        .search-box {
-            background: white;
-            border-radius: 50px;
-            padding: 5px 25px;
-            display: flex;
-            align-items: center;
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.3s;
-        }
-
-        .search-box:focus-within {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .search-box i { color: var(--text-light); font-size: 1.2rem; }
-        
-        .search-box input {
-            border: none;
-            outline: none;
-            padding: 15px;
-            width: 100%;
-            font-size: 1rem;
-            background: transparent;
         }
 
         .filters {
@@ -148,14 +150,14 @@
 
         .filter-btn {
             background: white;
-            border: none;
+            border: 2px solid transparent;
             padding: 10px 25px;
             border-radius: 30px;
             font-weight: 600;
             color: var(--text-light);
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
         }
 
         .filter-btn:hover {
@@ -164,19 +166,18 @@
         }
 
         .filter-btn.active {
-            background: var(--primary-gradient);
+            background: var(--text-dark);
             color: white;
-            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.4);
-            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* --- Produtos --- */
+        /* --- Grelha de Produtos --- */
         .grid {
             max-width: 1100px;
             margin: 0 auto 80px;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
         }
 
@@ -188,23 +189,18 @@
             box-shadow: var(--shadow-soft);
             transition: all 0.4s ease;
             animation: scaleIn 0.6s ease-out backwards;
-            border: 1px solid rgba(255, 255, 255, 0.5);
             display: flex;
             flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.8);
         }
 
-        /* Delays para animação em cascata */
-        .card:nth-child(1) { animation-delay: 0.3s; }
-        .card:nth-child(2) { animation-delay: 0.4s; }
-        .card:nth-child(3) { animation-delay: 0.5s; }
-
         .card:hover {
-            transform: translateY(-10px) scale(1.02);
+            transform: translateY(-10px);
             box-shadow: var(--shadow-hover);
         }
 
         .card-img-container {
-            height: 220px;
+            height: 200px;
             overflow: hidden;
             position: relative;
         }
@@ -216,21 +212,20 @@
             transition: transform 0.6s ease;
         }
 
-        .card:hover .card-img {
-            transform: scale(1.1);
-        }
+        .card:hover .card-img { transform: scale(1.1); }
 
         .tag {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 6px 15px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 700;
             color: var(--accent-color);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            z-index: 2;
         }
 
         .card-body {
@@ -241,33 +236,45 @@
         }
 
         .card-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-dark);
+            margin-bottom: 5px;
         }
 
         .card-price {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--whatsapp-color);
             margin-bottom: 15px;
         }
 
-        .card-desc {
-            color: var(--text-light);
-            font-size: 0.95rem;
+        /* Lista de Funcionalidades no Cartão */
+        .feature-list {
+            list-style: none;
             margin-bottom: 25px;
             flex-grow: 1;
         }
 
+        .feature-list li {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li i {
+            color: var(--whatsapp-color);
+            font-size: 1rem;
+        }
+
+        /* Botão Animado Premium */
         .btn-buy {
             background: var(--whatsapp-color);
             color: white;
             text-decoration: none;
-            padding: 15px;
+            padding: 16px;
             border-radius: 12px;
             font-weight: 600;
             text-align: center;
@@ -275,149 +282,151 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: all 0.3s;
             position: relative;
             overflow: hidden;
-            z-index: 1;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+            box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3);
         }
 
-        .btn-buy::before {
+        /* O efeito de luz passando (Shimmer) */
+        .btn-buy::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 0; height: 100%;
-            background: rgba(0, 0, 0, 0.1);
-            transition: width 0.3s;
-            z-index: -1;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-15deg);
+            animation: shimmer 3s infinite;
         }
-
-        .btn-buy:hover::before { width: 100%; }
 
         .btn-buy:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4);
+            background: #1da851;
         }
 
-        .btn-buy i { font-size: 1.3rem; }
-
-        /* --- Botão Flutuante --- */
-        .fab-whatsapp {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--whatsapp-color);
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2rem;
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
-            animation: pulseGlow 2s infinite;
-            transition: transform 0.3s;
-            z-index: 1000;
-        }
-
-        .fab-whatsapp:hover {
-            transform: scale(1.1) rotate(-10deg);
-            animation: none;
-        }
-
-        /* --- Lógica de Filtro --- */
-        .hide {
-            display: none !important;
-        }
+        .hide { display: none !important; }
 
     </style>
 </head>
 <body>
 
     <header>
-        <h1><i class="fas fa-bolt"></i> DigitalStore Premium</h1>
-        <p>Inovação, Rapidez e Segurança ao seu alcance</p>
+        <h1><i class="fas fa-rocket"></i> DigitalStore</h1>
+        <p>Acesso rápido e sem fronteiras ao mundo digital</p>
     </header>
 
-    <div class="controls">
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" id="search" placeholder="O que procura hoje?">
+    <!-- NOVA SECÇÃO: As Vantagens -->
+    <div class="advantages">
+        <div class="adv-card">
+            <i class="fas fa-bolt adv-icon"></i>
+            <h3 class="adv-title">Entrega Imediata</h3>
+            <p class="adv-text">Receba os dados do seu cartão ou número em minutos através do WhatsApp.</p>
         </div>
-
-        <div class="filters">
-            <button class="filter-btn active" data-filter="all">Tudo</button>
-            <button class="filter-btn" data-filter="cards">Cartões</button>
-            <button class="filter-btn" data-filter="numbers">Números</button>
-            <button class="filter-btn" data-filter="services">Serviços</button>
+        <div class="adv-card">
+            <i class="fas fa-globe adv-icon"></i>
+            <h3 class="adv-title">Uso Global</h3>
+            <p class="adv-text">Serviços que funcionam em Moçambique e em qualquer outra parte do mundo.</p>
+        </div>
+        <div class="adv-card">
+            <i class="fas fa-shield-alt adv-icon"></i>
+            <h3 class="adv-title">100% Seguro</h3>
+            <p class="adv-text">Privacidade garantida. Não precisa de expor os seus dados bancários reais.</p>
         </div>
     </div>
 
+    <!-- Filtros -->
+    <div class="controls">
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Ver Tudo</button>
+            <button class="filter-btn" data-filter="cards">💳 Cartões Virtuais</button>
+            <button class="filter-btn" data-filter="numbers">📱 Números Virtuais</button>
+            <button class="filter-btn" data-filter="services">🌐 Outros Serviços</button>
+        </div>
+    </div>
+
+    <!-- Grelha de Produtos -->
     <div class="grid" id="product-grid">
         
-        <!-- Cartão Virtual -->
+        <!-- Produto: Cartão Virtual -->
         <div class="card" data-category="cards">
             <div class="card-img-container">
-                <div class="tag"><i class="fas fa-star"></i> Mais Vendido</div>
-                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="Cartão" class="card-img">
+                <div class="tag"><i class="fas fa-fire"></i> Mais Popular</div>
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="Cartão Virtual" class="card-img">
             </div>
             <div class="card-body">
                 <h3 class="card-title">Cartão Virtual Visa</h3>
                 <div class="card-price">500 MT</div>
-                <p class="card-desc">Faça compras internacionais, ative contas na Netflix, Spotify e pague anúncios com segurança e privacidade.</p>
+                
+                <!-- Lista de funções detalhadas -->
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Compras online seguras</li>
+                    <li><i class="fas fa-check-circle"></i> Assinaturas (Netflix, Spotify...)</li>
+                    <li><i class="fas fa-check-circle"></i> Sem limites de gastos/transações</li>
+                    <li><i class="fas fa-check-circle"></i> Aceite em qualquer país do mundo</li>
+                    <li><i class="fas fa-check-circle"></i> Pagamento de anúncios (Meta, Google)</li>
+                </ul>
+
                 <a href="https://wa.me/258849085157?text=Olá,%20quero%20comprar%20o%20*Cartão%20Virtual%20Visa*%20de%20*500%20MT*." class="btn-buy" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Comprar Agora
+                    <i class="fab fa-whatsapp"></i> Comprar pelo WhatsApp
                 </a>
             </div>
         </div>
 
-        <!-- Número Virtual -->
+        <!-- Produto: Número Virtual -->
         <div class="card" data-category="numbers">
             <div class="card-img-container">
-                <div class="tag" style="color: #6366f1;">Entrega Rápida</div>
-                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Número" class="card-img">
+                <div class="tag" style="color: #4f46e5;"><i class="fas fa-star"></i> Top Redes Sociais</div>
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Número Virtual" class="card-img">
             </div>
             <div class="card-body">
-                <h3 class="card-title">Número Internacional</h3>
+                <h3 class="card-title">Número Virtual Internacional</h3>
                 <div class="card-price">100 MT</div>
-                <p class="card-desc">Crie contas secundárias no WhatsApp, Telegram e redes sociais sem expor o seu número pessoal real.</p>
-                <a href="https://wa.me/258849085157?text=Olá,%20quero%20comprar%20o%20*Número%20Virtual*%20de%20*100%20MT*." class="btn-buy" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Comprar Agora
+                
+                <!-- Lista de funções detalhadas -->
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Registo no WhatsApp & Telegram</li>
+                    <li><i class="fas fa-check-circle"></i> Ativação de Facebook, Instagram e TikTok</li>
+                    <li><i class="fas fa-check-circle"></i> Separe a vida pessoal dos negócios</li>
+                    <li><i class="fas fa-check-circle"></i> Receba o código SMS na hora</li>
+                    <li><i class="fas fa-check-circle"></i> Funciona sem chip físico</li>
+                </ul>
+
+                <a href="https://wa.me/258849085157?text=Olá,%20quero%20comprar%20um%20*Número%20Virtual*%20para%20redes%20sociais%20(*100%20MT*)." class="btn-buy" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar pelo WhatsApp
                 </a>
             </div>
         </div>
 
-        <!-- Configuração Web -->
+        <!-- Produto: Serviço Web -->
         <div class="card" data-category="services">
             <div class="card-img-container">
-                <div class="tag" style="color: #10b981;">Profissional</div>
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Serviço" class="card-img">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Serviços Web" class="card-img">
             </div>
             <div class="card-body">
-                <h3 class="card-title">Setup de Domínio</h3>
+                <h3 class="card-title">Configuração Web</h3>
                 <div class="card-price">1.500 MT</div>
-                <p class="card-desc">Configuração completa de DNS, redirecionamentos e ativação de certificado SSL para o seu projeto web.</p>
-                <a href="https://wa.me/258849085157?text=Olá,%20preciso%20do%20serviço%20de%20*Setup%20de%20Domínio*." class="btn-buy" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Contratar Serviço
+                
+                <ul class="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Ligação de Domínio Customizado</li>
+                    <li><i class="fas fa-check-circle"></i> Certificado SSL de Segurança</li>
+                    <li><i class="fas fa-check-circle"></i> Otimização de Velocidade</li>
+                </ul>
+
+                <a href="https://wa.me/258849085157?text=Olá,%20preciso%20de%20ajuda%20com%20*Serviços%20Web*." class="btn-buy" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Falar com Especialista
                 </a>
             </div>
         </div>
 
     </div>
 
-    <!-- WhatsApp Flutuante Animado -->
-    <a href="https://wa.me/258849085157?text=Olá,%20visitei%20a%20sua%20loja%20e%20preciso%20de%20ajuda." class="fab-whatsapp" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Lógica JavaScript Refinada com Animações -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const searchInput = document.getElementById('search');
             const filterBtns = document.querySelectorAll('.filter-btn');
             const cards = document.querySelectorAll('.card');
 
-            // Filtro por categorias com animação
+            // Lógica de Filtros
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterBtns.forEach(b => b.classList.remove('active'));
@@ -426,9 +435,8 @@
                     const filterValue = btn.getAttribute('data-filter');
                     
                     cards.forEach(card => {
-                        // Reseta a animação para repetir
                         card.style.animation = 'none';
-                        card.offsetHeight; /* Trigger reflow */
+                        card.offsetHeight; /* Força o reflow para reiniciar animação */
                         
                         if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                             card.classList.remove('hide');
@@ -437,27 +445,6 @@
                             card.classList.add('hide');
                         }
                     });
-                });
-            });
-
-            // Pesquisa dinâmica com animação
-            searchInput.addEventListener('input', (e) => {
-                const term = e.target.value.toLowerCase();
-                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
-
-                cards.forEach(card => {
-                    const title = card.querySelector('.card-title').textContent.toLowerCase();
-                    const desc = card.querySelector('.card-desc').textContent.toLowerCase();
-                    const category = card.getAttribute('data-category');
-                    
-                    const matchesSearch = title.includes(term) || desc.includes(term);
-                    const matchesFilter = activeFilter === 'all' || category === activeFilter;
-
-                    if (matchesSearch && matchesFilter) {
-                        card.classList.remove('hide');
-                    } else {
-                        card.classList.add('hide');
-                    }
                 });
             });
         });
