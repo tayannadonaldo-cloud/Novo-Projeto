@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Digital | Serviços Virtuais</title>
-    <!-- Fontes do Google e Ícones -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Loja Digital Premium</title>
+    <!-- Fonte Premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- Variáveis Globais --- */
+        /* --- Variáveis de Cores Vivas --- */
         :root {
-            --primary-color: #0f172a;
-            --secondary-color: #3b82f6;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+            --accent-color: #ec4899;
             --whatsapp-color: #25D366;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px -5px rgba(99, 102, 241, 0.2);
         }
 
         /* --- Estilos Base --- */
@@ -25,324 +28,439 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* --- Cabeçalho e Navegação --- */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        /* --- Animações (Keyframes) --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* --- Cabeçalho --- */
+        header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: var(--shadow-soft);
+            animation: fadeInDown 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         header h1 {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
         }
 
         header p {
-            color: #cbd5e1;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
-        /* --- Barra de Pesquisa e Filtros --- */
-        .controls-container {
-            max-width: 1000px;
-            margin: 30px auto;
+        /* --- Pesquisa e Filtros --- */
+        .controls {
+            max-width: 1100px;
+            margin: -25px auto 30px;
             padding: 0 20px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .search-bar {
-            flex: 1;
-            min-width: 250px;
+            flex-direction: column;
+            gap: 20px;
             position: relative;
+            z-index: 10;
+            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
-        .search-bar input {
-            width: 100%;
-            padding: 12px 15px 12px 40px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .search-bar input:focus {
-            border-color: var(--secondary-color);
-        }
-
-        .search-bar i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-
-        .categories {
+        .search-box {
+            background: white;
+            border-radius: 50px;
+            padding: 5px 25px;
             display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 5px;
+            align-items: center;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s;
         }
 
-        .category-btn {
-            background-color: white;
-            border: 1px solid #e2e8f0;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
+        .search-box:focus-within {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .search-box i { color: var(--text-light); font-size: 1.2rem; }
+        
+        .search-box input {
+            border: none;
+            outline: none;
+            padding: 15px;
+            width: 100%;
+            font-size: 1rem;
+            background: transparent;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
             font-weight: 600;
-            color: var(--text-main);
-            white-space: nowrap;
-            transition: all 0.3s;
+            color: var(--text-light);
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .category-btn.active, .category-btn:hover {
-            background-color: var(--secondary-color);
+        .filter-btn:hover {
+            transform: translateY(-3px);
+            color: var(--text-dark);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-gradient);
             color: white;
-            border-color: var(--secondary-color);
+            box-shadow: 0 8px 15px rgba(99, 102, 241, 0.4);
+            transform: scale(1.05);
         }
 
-        /* --- Grelha de Produtos --- */
-        .product-grid {
-            max-width: 1000px;
-            margin: 0 auto 50px auto;
+        /* --- Produtos --- */
+        .grid {
+            max-width: 1100px;
+            margin: 0 auto 80px;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.4s ease;
+            animation: scaleIn 0.6s ease-out backwards;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             display: flex;
             flex-direction: column;
         }
 
+        /* Delays para animação em cascata */
+        .card:nth-child(1) { animation-delay: 0.3s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.5s; }
+
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-hover);
         }
 
-        .card-img {
-            height: 180px;
-            background-color: #e2e8f0;
-            background-size: cover;
-            background-position: center;
+        .card-img-container {
+            height: 220px;
+            overflow: hidden;
             position: relative;
         }
 
-        .card-content {
-            padding: 20px;
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.1);
+        }
+
+        .tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .card-body {
+            padding: 25px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
         }
 
         .card-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
         }
 
         .card-price {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            color: var(--secondary-color);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
         }
 
         .card-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
             flex-grow: 1;
         }
 
         .btn-buy {
-            display: inline-block;
-            background-color: var(--whatsapp-color);
+            background: var(--whatsapp-color);
             color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
             text-decoration: none;
+            padding: 15px;
+            border-radius: 12px;
             font-weight: 600;
-            transition: background-color 0.3s;
-            width: 100%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
+
+        .btn-buy::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 0; height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            transition: width 0.3s;
+            z-index: -1;
+        }
+
+        .btn-buy:hover::before { width: 100%; }
 
         .btn-buy:hover {
-            background-color: #1da851;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
         }
 
-        .btn-buy i {
-            margin-right: 8px;
-            font-size: 1.1rem;
-        }
+        .btn-buy i { font-size: 1.3rem; }
 
-        /* --- Botão Flutuante do WhatsApp --- */
-        .floating-wa {
+        /* --- Botão Flutuante --- */
+        .fab-whatsapp {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: var(--whatsapp-color);
+            background: var(--whatsapp-color);
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 2rem;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
             text-decoration: none;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.5);
+            animation: pulseGlow 2s infinite;
             transition: transform 0.3s;
             z-index: 1000;
         }
 
-        .floating-wa:hover {
-            transform: scale(1.1);
+        .fab-whatsapp:hover {
+            transform: scale(1.1) rotate(-10deg);
+            animation: none;
         }
 
-        /* Ocultar produtos filtrados */
-        .hidden {
+        /* --- Lógica de Filtro --- */
+        .hide {
             display: none !important;
         }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1><i class="fas fa-store"></i> Digital Store</h1>
-        <p>A sua loja de serviços e produtos digitais</p>
+        <h1><i class="fas fa-bolt"></i> DigitalStore Premium</h1>
+        <p>Inovação, Rapidez e Segurança ao seu alcance</p>
     </header>
 
-    <div class="controls-container">
-        <!-- Barra de Pesquisa -->
-        <div class="search-bar">
+    <div class="controls">
+        <div class="search-box">
             <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="Pesquisar produtos...">
+            <input type="text" id="search" placeholder="O que procura hoje?">
         </div>
 
-        <!-- Filtros de Categoria -->
-        <div class="categories">
-            <button class="category-btn active" data-filter="all">Todos</button>
-            <button class="category-btn" data-filter="cartoes">Cartões Virtuais</button>
-            <button class="category-btn" data-filter="numeros">Números Virtuais</button>
-            <button class="category-btn" data-filter="servicos">Serviços Web</button>
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">Tudo</button>
+            <button class="filter-btn" data-filter="cards">Cartões</button>
+            <button class="filter-btn" data-filter="numbers">Números</button>
+            <button class="filter-btn" data-filter="services">Serviços</button>
         </div>
     </div>
 
-    <!-- Catálogo de Produtos -->
-    <div class="product-grid" id="productGrid">
+    <div class="grid" id="product-grid">
         
-        <!-- Produto 1 -->
-        <div class="card" data-category="cartoes">
-            <!-- Imagem de exemplo do Unsplash -->
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80');"></div>
-            <div class="card-content">
+        <!-- Cartão Virtual -->
+        <div class="card" data-category="cards">
+            <div class="card-img-container">
+                <div class="tag"><i class="fas fa-star"></i> Mais Vendido</div>
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="Cartão" class="card-img">
+            </div>
+            <div class="card-body">
                 <h3 class="card-title">Cartão Virtual Visa</h3>
-                <p class="card-price">500 MT</p>
-                <p class="card-desc">Perfeito para compras online internacionais, ativação de contas e pagamentos em plataformas digitais com total segurança.</p>
-                <!-- Link do WhatsApp configurado para o seu número com o indicativo 258 -->
-                <a href="https://wa.me/258849085157?text=Olá,%20gostaria%20de%20comprar%20um%20*Cartão%20Virtual%20Visa*%20no%20valor%20de%20*500%20MT*." target="_blank" class="btn-buy">
-                    <i class="fab fa-whatsapp"></i> Comprar agora
+                <div class="card-price">500 MT</div>
+                <p class="card-desc">Faça compras internacionais, ative contas na Netflix, Spotify e pague anúncios com segurança e privacidade.</p>
+                <a href="https://wa.me/258849085157?text=Olá,%20quero%20comprar%20o%20*Cartão%20Virtual%20Visa*%20de%20*500%20MT*." class="btn-buy" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar Agora
                 </a>
             </div>
         </div>
 
-        <!-- Produto 2 -->
-        <div class="card" data-category="numeros">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80');"></div>
-            <div class="card-content">
-                <h3 class="card-title">Número Virtual Internacional</h3>
-                <p class="card-price">100 MT</p>
-                <p class="card-desc">Receba SMS e ative contas no WhatsApp, Telegram e outras redes sociais com um número descartável ou permanente.</p>
-                <a href="https://wa.me/258849085157?text=Olá,%20gostaria%20de%20comprar%20um%20*Número%20Virtual*%20no%20valor%20de%20*100%20MT*." target="_blank" class="btn-buy">
-                    <i class="fab fa-whatsapp"></i> Comprar agora
+        <!-- Número Virtual -->
+        <div class="card" data-category="numbers">
+            <div class="card-img-container">
+                <div class="tag" style="color: #6366f1;">Entrega Rápida</div>
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Número" class="card-img">
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Número Internacional</h3>
+                <div class="card-price">100 MT</div>
+                <p class="card-desc">Crie contas secundárias no WhatsApp, Telegram e redes sociais sem expor o seu número pessoal real.</p>
+                <a href="https://wa.me/258849085157?text=Olá,%20quero%20comprar%20o%20*Número%20Virtual*%20de%20*100%20MT*." class="btn-buy" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar Agora
                 </a>
             </div>
         </div>
 
-        <!-- Produto 3 -->
-        <div class="card" data-category="servicos">
-            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80');"></div>
-            <div class="card-content">
-                <h3 class="card-title">Configuração de Domínio</h3>
-                <p class="card-price">1.500 MT</p>
-                <p class="card-desc">Ligação de domínio personalizado para sites estáticos ou WordPress com certificados SSL inclusos.</p>
-                <a href="https://wa.me/258849085157?text=Olá,%20tenho%20interesse%20no%20serviço%20de%20*Configuração%20de%20Domínio*." target="_blank" class="btn-buy">
-                    <i class="fab fa-whatsapp"></i> Contratar serviço
+        <!-- Configuração Web -->
+        <div class="card" data-category="services">
+            <div class="card-img-container">
+                <div class="tag" style="color: #10b981;">Profissional</div>
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Serviço" class="card-img">
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">Setup de Domínio</h3>
+                <div class="card-price">1.500 MT</div>
+                <p class="card-desc">Configuração completa de DNS, redirecionamentos e ativação de certificado SSL para o seu projeto web.</p>
+                <a href="https://wa.me/258849085157?text=Olá,%20preciso%20do%20serviço%20de%20*Setup%20de%20Domínio*." class="btn-buy" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contratar Serviço
                 </a>
             </div>
         </div>
 
     </div>
 
-    <!-- Botão Flutuante de Suporte -->
-    <a href="https://wa.me/258849085157?text=Olá!%20Vim%20pelo%20site%20e%20preciso%20de%20uma%20informação." class="floating-wa" target="_blank" title="Fale connosco no WhatsApp">
+    <!-- WhatsApp Flutuante Animado -->
+    <a href="https://wa.me/258849085157?text=Olá,%20visitei%20a%20sua%20loja%20e%20preciso%20de%20ajuda." class="fab-whatsapp" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- JavaScript para interatividade -->
+    <!-- Lógica JavaScript Refinada com Animações -->
     <script>
-        const searchInput = document.getElementById('searchInput');
-        const categoryBtns = document.querySelectorAll('.category-btn');
-        const cards = document.querySelectorAll('.card');
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.card');
 
-        // Função de pesquisa por texto
-        searchInput.addEventListener('input', filterProducts);
+            // Filtro por categorias com animação
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const filterValue = btn.getAttribute('data-filter');
+                    
+                    cards.forEach(card => {
+                        // Reseta a animação para repetir
+                        card.style.animation = 'none';
+                        card.offsetHeight; /* Trigger reflow */
+                        
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.classList.remove('hide');
+                            card.style.animation = 'scaleIn 0.5s ease-out forwards';
+                        } else {
+                            card.classList.add('hide');
+                        }
+                    });
+                });
+            });
 
-        // Função de filtro por categorias
-        categoryBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remover classe ativa de todos
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                // Adicionar ao clicado
-                btn.classList.add('active');
-                filterProducts();
+            // Pesquisa dinâmica com animação
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+
+                cards.forEach(card => {
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    const desc = card.querySelector('.card-desc').textContent.toLowerCase();
+                    const category = card.getAttribute('data-category');
+                    
+                    const matchesSearch = title.includes(term) || desc.includes(term);
+                    const matchesFilter = activeFilter === 'all' || category === activeFilter;
+
+                    if (matchesSearch && matchesFilter) {
+                        card.classList.remove('hide');
+                    } else {
+                        card.classList.add('hide');
+                    }
+                });
             });
         });
-
-        function filterProducts() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const activeCategory = document.querySelector('.category-btn.active').dataset.filter;
-
-            cards.forEach(card => {
-                const title = card.querySelector('.card-title').innerText.toLowerCase();
-                const desc = card.querySelector('.card-desc').innerText.toLowerCase();
-                const category = card.dataset.category;
-
-                const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
-                const matchesCategory = activeCategory === 'all' || category === activeCategory;
-
-                if (matchesSearch && matchesCategory) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-        }
     </script>
 </body>
 </html>
