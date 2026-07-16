@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja Digital Premium</title>
     <!-- Fonte Premium -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -23,290 +23,85 @@
             --shadow-hover: 0 20px 40px -5px rgba(79, 70, 229, 0.25);
         }
 
-        /* --- Estilos Base --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+        body { background: var(--bg-gradient); color: var(--text-dark); min-height: 100vh; overflow-x: hidden; }
 
-        body {
-            background: var(--bg-gradient);
-            color: var(--text-dark);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* --- Animações --- */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes scaleIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        /* Animação do Brilho no Botão */
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) skewX(-15deg); }
-            50% { transform: translateX(200%) skewX(-15deg); }
-            100% { transform: translateX(200%) skewX(-15deg); }
-        }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes shimmer { 0% { transform: translateX(-100%) skewX(-15deg); } 50% { transform: translateX(200%) skewX(-15deg); } 100% { transform: translateX(200%) skewX(-15deg); } }
 
         /* --- Cabeçalho --- */
-        header {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 50px 20px 70px;
-            text-align: center;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            box-shadow: var(--shadow-soft);
-            animation: fadeInDown 0.8s ease-out;
-            position: relative;
-        }
+        header { background: var(--primary-gradient); color: white; padding: 50px 20px 70px; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; box-shadow: var(--shadow-soft); animation: fadeInDown 0.8s ease-out; position: relative; }
+        header h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -1px; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
 
-        header h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-        }
+        /* --- Vantagens Globais --- */
+        .advantages { max-width: 1100px; margin: -40px auto 40px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; position: relative; z-index: 10; animation: fadeInUp 1s ease-out; }
+        .adv-card { background: white; padding: 20px; border-radius: 20px; text-align: center; box-shadow: var(--shadow-soft); transition: transform 0.3s; border-bottom: 4px solid var(--whatsapp-color); }
+        .adv-card:hover { transform: translateY(-5px); }
+        .adv-icon { font-size: 2.5rem; color: var(--whatsapp-color); margin-bottom: 15px; }
+        .adv-title { font-weight: 700; margin-bottom: 5px; }
+        .adv-text { font-size: 0.85rem; color: var(--text-light); }
 
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* --- Secção: As Vantagens --- */
-        .advantages {
-            max-width: 1100px;
-            margin: -40px auto 40px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            position: relative;
-            z-index: 10;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .adv-card {
-            background: white;
-            padding: 20px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.3s;
-            border-bottom: 4px solid var(--whatsapp-color);
-        }
-
-        .adv-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .adv-icon {
-            font-size: 2.5rem;
-            color: var(--whatsapp-color);
-            margin-bottom: 15px;
-        }
-
-        .adv-title {
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .adv-text {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        /* --- Filtros e Pesquisa --- */
-        .controls {
-            max-width: 1100px;
-            margin: 0 auto 30px;
-            padding: 0 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        .filters {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: white;
-            border: 2px solid transparent;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            color: var(--text-light);
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover {
-            transform: translateY(-3px);
-            color: var(--text-dark);
-        }
-
-        .filter-btn.active {
-            background: var(--text-dark);
-            color: white;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
+        /* --- Filtros --- */
+        .controls { max-width: 1100px; margin: 0 auto 30px; padding: 0 20px; display: flex; flex-direction: column; gap: 20px; animation: fadeInUp 1s ease-out 0.2s both; }
+        .filters { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .filter-btn { background: white; border: 2px solid transparent; padding: 10px 25px; border-radius: 30px; font-weight: 600; color: var(--text-light); cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: all 0.3s ease; }
+        .filter-btn:hover { transform: translateY(-3px); color: var(--text-dark); }
+        .filter-btn.active { background: var(--text-dark); color: white; box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); }
 
         /* --- Grelha de Produtos --- */
-        .grid {
-            max-width: 1100px;
-            margin: 0 auto 80px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.4s ease;
-            animation: scaleIn 0.6s ease-out backwards;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(255,255,255,0.8);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .card-img-container {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
+        .grid { max-width: 1100px; margin: 0 auto 80px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        .card { background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow-soft); transition: all 0.4s ease; animation: scaleIn 0.6s ease-out backwards; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.8); }
+        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-hover); }
+        .card-img-container { height: 180px; overflow: hidden; position: relative; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
         .card:hover .card-img { transform: scale(1.1); }
+        .tag { position: absolute; top: 15px; right: 15px; background: rgba(255, 255, 255, 0.95); padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; color: var(--accent-color); box-shadow: 0 4px 10px rgba(0,0,0,0.15); z-index: 2; }
+        .card-body { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
 
-        .tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            z-index: 2;
-        }
+        /* --- Marcas e Ícones --- */
+        .brand-showcase { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; align-items: center; }
+        .brand-badge { padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; color: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .bg-netflix { background: #E50914; }
+        .bg-amazon { background: #232F3E; color: #FF9900; }
+        .bg-disney { background: #113CCF; }
+        .bg-spotify { background: #1DB954; }
+        
+        .social-icons { display: flex; gap: 12px; font-size: 1.5rem; margin-bottom: 15px; color: #475569; }
+        .social-icons i.fa-whatsapp { color: #25D366; }
+        .social-icons i.fa-telegram { color: #0088cc; }
+        .social-icons i.fa-instagram { color: #E1306C; }
+        .social-icons i.fa-tiktok { color: #000000; }
+        .social-icons i.fa-facebook { color: #1877F2; }
 
-        .card-body {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
+        .country-codes { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px; }
+        .country-code { background: #f1f5f9; padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; border: 1px solid #e2e8f0; }
 
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
+        /* --- Vantagens (Toggle) --- */
+        .toggle-btn { background: none; border: none; color: var(--primary-gradient); font-weight: 600; font-size: 0.95rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 10px 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 15px; }
+        .toggle-btn i { transition: transform 0.3s; }
+        .toggle-btn.open i { transform: rotate(180deg); }
+        
+        .feature-list { list-style: none; margin-bottom: 20px; overflow: hidden; max-height: 0; transition: max-height 0.4s ease-in-out; }
+        .feature-list.open { max-height: 300px; }
+        .feature-list li { font-size: 0.9rem; color: var(--text-light); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+        .feature-list li i { color: var(--whatsapp-color); font-size: 1rem; }
 
-        .card-price {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--whatsapp-color);
-            margin-bottom: 15px;
-        }
+        /* --- Seleção de Preço --- */
+        .price-section { background: #f8fafc; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #e2e8f0; }
+        .price-section label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-light); margin-bottom: 8px; }
+        .price-select { width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #cbd5e1; font-size: 1rem; font-weight: 700; color: var(--text-dark); background: white; outline: none; cursor: pointer; transition: border-color 0.3s; }
+        .price-select:focus { border-color: #4f46e5; }
 
-        /* Lista de Funcionalidades no Cartão */
-        .feature-list {
-            list-style: none;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-
-        .feature-list li {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .feature-list li i {
-            color: var(--whatsapp-color);
-            font-size: 1rem;
-        }
-
-        /* Botão Animado Premium */
-        .btn-buy {
-            background: var(--whatsapp-color);
-            color: white;
-            text-decoration: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
-            box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3);
-        }
-
-        /* O efeito de luz passando (Shimmer) */
-        .btn-buy::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 50%; height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-15deg);
-            animation: shimmer 3s infinite;
-        }
-
-        .btn-buy:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4);
-            background: #1da851;
-        }
+        /* --- Botão Comprar --- */
+        .btn-buy { background: var(--whatsapp-color); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 1.1rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; position: relative; overflow: hidden; transition: all 0.3s; box-shadow: 0 8px 15px rgba(37, 211, 102, 0.3); width: 100%; }
+        .btn-buy::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%); transform: skewX(-15deg); animation: shimmer 3s infinite; }
+        .btn-buy:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 25px rgba(37, 211, 102, 0.4); background: #1da851; }
 
         .hide { display: none !important; }
-
     </style>
 </head>
 <body>
@@ -316,7 +111,6 @@
         <p>Acesso rápido e sem fronteiras ao mundo digital</p>
     </header>
 
-    <!-- NOVA SECÇÃO: As Vantagens -->
     <div class="advantages">
         <div class="adv-card">
             <i class="fas fa-bolt adv-icon"></i>
@@ -335,98 +129,157 @@
         </div>
     </div>
 
-    <!-- Filtros -->
     <div class="controls">
         <div class="filters">
             <button class="filter-btn active" data-filter="all">Ver Tudo</button>
             <button class="filter-btn" data-filter="cards">💳 Cartões Virtuais</button>
             <button class="filter-btn" data-filter="numbers">📱 Números Virtuais</button>
-            <button class="filter-btn" data-filter="services">🌐 Outros Serviços</button>
         </div>
     </div>
 
-    <!-- Grelha de Produtos -->
     <div class="grid" id="product-grid">
         
-        <!-- Produto: Cartão Virtual -->
+        <!-- PRODUTO: CARTÃO VIRTUAL -->
         <div class="card" data-category="cards">
             <div class="card-img-container">
                 <div class="tag"><i class="fas fa-fire"></i> Mais Popular</div>
                 <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80" alt="Cartão Virtual" class="card-img">
             </div>
             <div class="card-body">
-                <h3 class="card-title">Cartão Virtual Visa</h3>
-                <div class="card-price">500 MT</div>
+                <h3 class="card-title">Cartão Virtual Premium</h3>
                 
-                <!-- Lista de funções detalhadas -->
-                <ul class="feature-list">
+                <!-- Marcas Suportadas -->
+                <div class="brand-showcase">
+                    <span class="brand-badge bg-netflix"><i class="fas fa-play"></i> Netflix</span>
+                    <span class="brand-badge bg-amazon"><i class="fab fa-amazon"></i> Amazon</span>
+                    <span class="brand-badge bg-disney"><i class="fas fa-plus"></i> Disney+</span>
+                    <span class="brand-badge bg-spotify"><i class="fab fa-spotify"></i> Spotify</span>
+                </div>
+
+                <!-- Botão de Ver Vantagens -->
+                <button class="toggle-btn" onclick="toggleFeatures('feat-card', this)">
+                    Ver as Vantagens <i class="fas fa-chevron-down"></i>
+                </button>
+
+                <!-- Lista Escondida de Vantagens -->
+                <ul class="feature-list" id="feat-card">
                     <li><i class="fas fa-check-circle"></i> Compras online seguras</li>
-                    <li><i class="fas fa-check-circle"></i> Assinaturas (Netflix, Spotify...)</li>
-                    <li><i class="fas fa-check-circle"></i> Sem limites de gastos/transações</li>
-                    <li><i class="fas fa-check-circle"></i> Aceite em qualquer país do mundo</li>
-                    <li><i class="fas fa-check-circle"></i> Pagamento de anúncios (Meta, Google)</li>
+                    <li><i class="fas fa-check-circle"></i> Assinaturas sem stress</li>
+                    <li><i class="fas fa-check-circle"></i> Sem limites de gastos</li>
+                    <li><i class="fas fa-check-circle"></i> Aceite em qualquer país</li>
+                    <li><i class="fas fa-check-circle"></i> Pagamento de anúncios (Meta/Google)</li>
                 </ul>
 
-                <a href="https://wa.me/258849085157?text=Olá,%20quero%20comprar%20o%20*Cartão%20Virtual%20Visa*%20de%20*500%20MT*." class="btn-buy" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Comprar pelo WhatsApp
-                </a>
+                <!-- Seleção de Preço (150 a 500) -->
+                <div class="price-section">
+                    <label>Escolha o saldo pretendido:</label>
+                    <select id="price-card" class="price-select">
+                        <option value="150">150 MT</option>
+                        <option value="250">250 MT</option>
+                        <option value="350">350 MT</option>
+                        <option value="500">500 MT</option>
+                    </select>
+                </div>
+
+                <!-- Botão de Compra Dinâmico -->
+                <button class="btn-buy" onclick="comprarItem('Cartão Virtual Premium', 'price-card')">
+                    <i class="fab fa-whatsapp"></i> Comprar Agora
+                </button>
             </div>
         </div>
 
-        <!-- Produto: Número Virtual -->
+        <!-- PRODUTO: NÚMERO VIRTUAL -->
         <div class="card" data-category="numbers">
             <div class="card-img-container">
                 <div class="tag" style="color: #4f46e5;"><i class="fas fa-star"></i> Top Redes Sociais</div>
                 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80" alt="Número Virtual" class="card-img">
             </div>
             <div class="card-body">
-                <h3 class="card-title">Número Virtual Internacional</h3>
-                <div class="card-price">100 MT</div>
+                <h3 class="card-title">Número Virtual Global</h3>
                 
-                <!-- Lista de funções detalhadas -->
-                <ul class="feature-list">
-                    <li><i class="fas fa-check-circle"></i> Registo no WhatsApp & Telegram</li>
-                    <li><i class="fas fa-check-circle"></i> Ativação de Facebook, Instagram e TikTok</li>
+                <!-- Códigos de Países -->
+                <div class="country-codes">
+                    <span class="country-code">🇺🇸 +1</span>
+                    <span class="country-code">🇬🇧 +44</span>
+                    <span class="country-code">🇧🇷 +55</span>
+                    <span class="country-code">🇵🇹 +351</span>
+                    <span class="country-code">🇿🇦 +27</span>
+                </div>
+
+                <!-- Redes Sociais (Alta Qualidade) -->
+                <div class="social-icons">
+                    <i class="fab fa-whatsapp" title="WhatsApp"></i>
+                    <i class="fab fa-telegram" title="Telegram"></i>
+                    <i class="fab fa-instagram" title="Instagram"></i>
+                    <i class="fab fa-tiktok" title="TikTok"></i>
+                    <i class="fab fa-facebook" title="Facebook"></i>
+                </div>
+
+                <!-- Botão de Ver Vantagens -->
+                <button class="toggle-btn" onclick="toggleFeatures('feat-number', this)">
+                    Ver as Vantagens <i class="fas fa-chevron-down"></i>
+                </button>
+
+                <!-- Lista Escondida de Vantagens -->
+                <ul class="feature-list" id="feat-number">
+                    <li><i class="fas fa-check-circle"></i> Registo anónimo em Apps</li>
                     <li><i class="fas fa-check-circle"></i> Separe a vida pessoal dos negócios</li>
                     <li><i class="fas fa-check-circle"></i> Receba o código SMS na hora</li>
-                    <li><i class="fas fa-check-circle"></i> Funciona sem chip físico</li>
+                    <li><i class="fas fa-check-circle"></i> Sem necessidade de chip físico</li>
                 </ul>
 
-                <a href="https://wa.me/258849085157?text=Olá,%20quero%20comprar%20um%20*Número%20Virtual*%20para%20redes%20sociais%20(*100%20MT*)." class="btn-buy" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Comprar pelo WhatsApp
-                </a>
-            </div>
-        </div>
+                <!-- Seleção de Preço (135 a 300) -->
+                <div class="price-section">
+                    <label>Escolha o seu plano:</label>
+                    <select id="price-number" class="price-select">
+                        <option value="135">135 MT</option>
+                        <option value="200">200 MT</option>
+                        <option value="250">250 MT</option>
+                        <option value="300">300 MT</option>
+                    </select>
+                </div>
 
-        <!-- Produto: Serviço Web -->
-        <div class="card" data-category="services">
-            <div class="card-img-container">
-                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80" alt="Serviços Web" class="card-img">
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">Configuração Web</h3>
-                <div class="card-price">1.500 MT</div>
-                
-                <ul class="feature-list">
-                    <li><i class="fas fa-check-circle"></i> Ligação de Domínio Customizado</li>
-                    <li><i class="fas fa-check-circle"></i> Certificado SSL de Segurança</li>
-                    <li><i class="fas fa-check-circle"></i> Otimização de Velocidade</li>
-                </ul>
-
-                <a href="https://wa.me/258849085157?text=Olá,%20preciso%20de%20ajuda%20com%20*Serviços%20Web*." class="btn-buy" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Falar com Especialista
-                </a>
+                <!-- Botão de Compra Dinâmico -->
+                <button class="btn-buy" onclick="comprarItem('Número Virtual Global', 'price-number')">
+                    <i class="fab fa-whatsapp"></i> Comprar Agora
+                </button>
             </div>
         </div>
 
     </div>
 
+    <!-- SCRIPTS -->
     <script>
+        // Função para mostrar/esconder vantagens animadamente
+        function toggleFeatures(listId, btnElement) {
+            const list = document.getElementById(listId);
+            list.classList.toggle('open');
+            btnElement.classList.toggle('open');
+        }
+
+        // Função para gerar o link do WhatsApp dinamicamente
+        function comprarItem(nomeProduto, selectId) {
+            // Pegar o preço selecionado
+            const preco = document.getElementById(selectId).value;
+            
+            // O seu número
+            const numeroTelefone = "258849085157";
+            
+            // Construir a mensagem com a instrução do comprovativo
+            const mensagem = `Olá, quero comprar o *${nomeProduto}* no valor de *${preco} MT*.\n\n*Nota:* Já tenho o conhecimento de que, após mandar o pagamento, mandarei o comprovativo de pagamento em Screenshot.`;
+            
+            // Codificar a mensagem para URL
+            const mensagemCodificada = encodeURIComponent(mensagem);
+            
+            // Abrir WhatsApp
+            window.open(`https://wa.me/${numeroTelefone}?text=${mensagemCodificada}`, '_blank');
+        }
+
+        // Lógica de Filtros
         document.addEventListener('DOMContentLoaded', () => {
             const filterBtns = document.querySelectorAll('.filter-btn');
             const cards = document.querySelectorAll('.card');
 
-            // Lógica de Filtros
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
                     filterBtns.forEach(b => b.classList.remove('active'));
@@ -436,7 +289,7 @@
                     
                     cards.forEach(card => {
                         card.style.animation = 'none';
-                        card.offsetHeight; /* Força o reflow para reiniciar animação */
+                        card.offsetHeight; 
                         
                         if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                             card.classList.remove('hide');
