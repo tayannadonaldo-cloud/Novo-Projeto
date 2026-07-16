@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Digital | Serviços Virtuais</title>
+    <!-- Fontes do Google e Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- Variáveis Globais --- */
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #3b82f6;
+            --whatsapp-color: #25D366;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
+        /* --- Estilos Base --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* --- Cabeçalho e Navegação --- */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        header p {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+
+        /* --- Barra de Pesquisa e Filtros --- */
+        .controls-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .category-btn {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-main);
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .category-btn.active, .category-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        /* --- Grelha de Produtos --- */
+        .product-grid {
+            max-width: 1000px;
+            margin: 0 auto 50px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img {
+            height: 180px;
+            background-color: #e2e8f0;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .card-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .btn-buy {
+            display: inline-block;
+            background-color: var(--whatsapp-color);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        .btn-buy:hover {
+            background-color: #1da851;
+        }
+
+        .btn-buy i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        /* --- Botão Flutuante do WhatsApp --- */
+        .floating-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp-color);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+            text-decoration: none;
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .floating-wa:hover {
+            transform: scale(1.1);
+        }
+
+        /* Ocultar produtos filtrados */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fas fa-store"></i> Digital Store</h1>
+        <p>A sua loja de serviços e produtos digitais</p>
+    </header>
+
+    <div class="controls-container">
+        <!-- Barra de Pesquisa -->
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Pesquisar produtos...">
+        </div>
+
+        <!-- Filtros de Categoria -->
+        <div class="categories">
+            <button class="category-btn active" data-filter="all">Todos</button>
+            <button class="category-btn" data-filter="cartoes">Cartões Virtuais</button>
+            <button class="category-btn" data-filter="numeros">Números Virtuais</button>
+            <button class="category-btn" data-filter="servicos">Serviços Web</button>
+        </div>
+    </div>
+
+    <!-- Catálogo de Produtos -->
+    <div class="product-grid" id="productGrid">
+        
+        <!-- Produto 1 -->
+        <div class="card" data-category="cartoes">
+            <!-- Imagem de exemplo do Unsplash -->
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="card-content">
+                <h3 class="card-title">Cartão Virtual Visa</h3>
+                <p class="card-price">500 MT</p>
+                <p class="card-desc">Perfeito para compras online internacionais, ativação de contas e pagamentos em plataformas digitais com total segurança.</p>
+                <!-- Link do WhatsApp configurado para o seu número com o indicativo 258 -->
+                <a href="https://wa.me/258849085157?text=Olá,%20gostaria%20de%20comprar%20um%20*Cartão%20Virtual%20Visa*%20no%20valor%20de%20*500%20MT*." target="_blank" class="btn-buy">
+                    <i class="fab fa-whatsapp"></i> Comprar agora
+                </a>
+            </div>
+        </div>
+
+        <!-- Produto 2 -->
+        <div class="card" data-category="numeros">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="card-content">
+                <h3 class="card-title">Número Virtual Internacional</h3>
+                <p class="card-price">100 MT</p>
+                <p class="card-desc">Receba SMS e ative contas no WhatsApp, Telegram e outras redes sociais com um número descartável ou permanente.</p>
+                <a href="https://wa.me/258849085157?text=Olá,%20gostaria%20de%20comprar%20um%20*Número%20Virtual*%20no%20valor%20de%20*100%20MT*." target="_blank" class="btn-buy">
+                    <i class="fab fa-whatsapp"></i> Comprar agora
+                </a>
+            </div>
+        </div>
+
+        <!-- Produto 3 -->
+        <div class="card" data-category="servicos">
+            <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80');"></div>
+            <div class="card-content">
+                <h3 class="card-title">Configuração de Domínio</h3>
+                <p class="card-price">1.500 MT</p>
+                <p class="card-desc">Ligação de domínio personalizado para sites estáticos ou WordPress com certificados SSL inclusos.</p>
+                <a href="https://wa.me/258849085157?text=Olá,%20tenho%20interesse%20no%20serviço%20de%20*Configuração%20de%20Domínio*." target="_blank" class="btn-buy">
+                    <i class="fab fa-whatsapp"></i> Contratar serviço
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Botão Flutuante de Suporte -->
+    <a href="https://wa.me/258849085157?text=Olá!%20Vim%20pelo%20site%20e%20preciso%20de%20uma%20informação." class="floating-wa" target="_blank" title="Fale connosco no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript para interatividade -->
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const cards = document.querySelectorAll('.card');
+
+        // Função de pesquisa por texto
+        searchInput.addEventListener('input', filterProducts);
+
+        // Função de filtro por categorias
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remover classe ativa de todos
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                // Adicionar ao clicado
+                btn.classList.add('active');
+                filterProducts();
+            });
+        });
+
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.category-btn.active').dataset.filter;
+
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title').innerText.toLowerCase();
+                const desc = card.querySelector('.card-desc').innerText.toLowerCase();
+                const category = card.dataset.category;
+
+                const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
+                const matchesCategory = activeCategory === 'all' || category === activeCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
